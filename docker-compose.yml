@@ -1,0 +1,31 @@
+version: "3.8"
+services:
+  node:
+    build:
+      context: ./docker/node
+    tty: true
+    volumes:
+      - ./next:/var/www/next
+      - node-modules-store:/var/www/next/node_modules
+    ports:
+      - "3000:3000"
+
+  mysql:
+    build:
+      context: .
+      dockerfile: ./docker/mysql/Dockerfile
+    ports: 
+      - 13306:3306
+    volumes:
+      - db-store:/var/lib/mysql
+      - ./docker/mysql/logs:/var/log/mysql
+      - ./docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+    environment:
+      - MYSQL_DATABASE=${DB_NAME}
+      - MYSQL_USER=${DB_USER}
+      - MYSQL_PASSWORD=${DB_PASS}
+      - MYSQL_ROOT_PASSWORD=${DB_PASS}
+
+volumes:
+  db-store:
+  node-modules-store:
