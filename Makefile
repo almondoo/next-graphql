@@ -22,8 +22,14 @@ down:
 ps:
 	docker-compose ps
 
+backend:
+	docker-compose exec backend ash
+
 node:
 	docker-compose exec node ash
 
 mysql:
-	doker-compose exec mysql ash
+	docker-compose exec mysql bash
+
+nginx:
+	docker-compose exec nginx ash
