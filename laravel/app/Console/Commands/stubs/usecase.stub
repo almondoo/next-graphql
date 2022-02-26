@@ -1,0 +1,27 @@
+<?php
+
+namespace {{ namespace }};
+
+use App\UseCases\UseCase;
+
+class {{ class }}UseCase extends UseCase
+{
+    protected Model $model;
+
+    /**
+     * 必要なものは先にinjectionする
+     */
+    public function __construct(Model $model)
+    {
+        $this->model = $model;
+    }
+
+    /**
+     * 処理実行
+     */
+    public function execute(): array
+    {
+        // このユースケースに必要な処理を書く
+        return $this->commit();
+    }
+}

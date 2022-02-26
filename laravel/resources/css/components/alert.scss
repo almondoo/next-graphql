@@ -1,0 +1,18 @@
+.alert--component {
+  margin: 30px 0;
+  padding: 15px 20px;
+  color: #fff;
+  border-radius: 6px;
+
+  &.success {
+    background-color: $success-color;
+  }
+
+  &.warning {
+    background-color: $warning-color;
+  }
+
+  &.danger {
+    background-color: $warning-color;
+  }
+}

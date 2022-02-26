@@ -1,0 +1,21 @@
+.login-page {
+  .title {
+    margin-bottom: 30px;
+  }
+  h1 {
+    text-align: center;
+    font-size: 30px;
+  }
+
+  .card {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    margin: 0 auto;
+    @include max_mq(sm) {
+      width: 380px;
+    }
+  }
+}

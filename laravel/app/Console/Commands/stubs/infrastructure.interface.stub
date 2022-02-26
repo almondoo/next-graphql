@@ -1,0 +1,12 @@
+<?php
+
+namespace {{ namespace }};
+
+interface {{ class }}Interface
+{
+    public function find(int $id);
+    public function fetchAll();
+    public function create{{ class }}(array $request);
+    public function update{{ class }}(array $request);
+    public function delete{{ class }}(int $id);
+}

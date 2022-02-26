@@ -1,0 +1,42 @@
+nav.pagination {
+  display: inline-block;
+  margin-top: 10px;
+
+  > .pagination {
+    display: flex;
+    align-items: center;
+    border: 1px solid #888;
+    border-radius: 5px;
+    background-color: #eee;
+  }
+
+  .page--item {
+    border-right: 1px solid #888;
+    line-height: 1;
+
+    &.txt--color {
+      color: #4285f4;
+    }
+
+    &:last-of-type {
+      border-right: none;
+    }
+
+    &.active {
+      background-color: #4285f4;
+      color: #fff;
+      cursor: default;
+    }
+
+    &.disabled {
+      .page--link {
+        cursor: default;
+      }
+    }
+
+    .page--link {
+      display: block;
+      padding: 8px 12px;
+    }
+  }
+}

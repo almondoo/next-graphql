@@ -1,0 +1,44 @@
+<?php
+
+namespace {{ namespace }};
+
+use App\Infrastructure\Interfaces\{{ class }}Interface;
+use App\Models\{{ class }};
+
+class {{ class }}Repository implements {{ class }}Interface
+{
+    private {{ class }} ${{ class }};
+
+    /**
+     * 初期化
+     */
+    public function __construct({{ class }} ${{ class }})
+    {
+        $this->{{ class }} = ${{ class }};
+    }
+
+    public function find(int $id)
+    {
+        return $this->{{ class }}->find($id);
+    }
+
+    public function fetchAll()
+    {
+        return $this->{{ class }}->get();
+    }
+
+    public function create{{ class }}(array $request)
+    {
+        return $this->{{ class }}->create($request);
+    }
+
+     public function update{{ class }}(array $request)
+    {
+        return $this->{{ class }}->fill($request)->save();
+    }
+
+    public function delete{{ class }}(int $id)
+    {
+        return $this->{{ class }}->destroy($id);
+    }
+}

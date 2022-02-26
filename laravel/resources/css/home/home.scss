@@ -1,0 +1,25 @@
+.home-page {
+  .link__group {
+    display: flex;
+    align-items: flex-start;
+    flex-flow: column;
+    margin-top: 50px;
+    margin-left: 50px;
+
+    > a {
+      margin-top: 20px;
+
+      &:first-child {
+        margin-top: 0;
+      }
+    }
+  }
+
+  .modal__title {
+    margin-bottom: 30px;
+    > h1 {
+      text-align: center;
+      font-size: 30px;
+    }
+  }
+}

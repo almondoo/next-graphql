@@ -1,0 +1,40 @@
+<?php
+
+namespace {{ namespace }};
+
+use App\Http\Requests\Request;
+
+class {{ class }} extends Request
+{
+    /**
+     * リクエストを行う権限があるかどうか確認
+     *
+     * @return bool
+     */
+    public function authorize()
+    {
+        return true;
+    }
+
+    /**
+     * バリデーションするルール
+     *
+     * @return array
+     */
+    public function rules()
+    {
+        return [
+            //
+        ];
+    }
+
+    /**
+     * バリデーションエラーのカスタム属性の取得
+     */
+    public function attributes(): array
+    {
+        return [
+            //
+        ];
+    }
+}
