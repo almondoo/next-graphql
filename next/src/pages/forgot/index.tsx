@@ -4,7 +4,7 @@ import Template from 'components/templates/Forgot/index';
 import { useSetRecoilState } from 'recoil';
 import { pageTitle } from 'recoil/title/atom';
 
-const Forgot: NextPage = () => {
+const ForgotPage: NextPage = () => {
   const setTitle = useSetRecoilState<string>(pageTitle);
   useEffect(() => {
     setTitle('Forgot');
@@ -13,4 +13,4 @@ const Forgot: NextPage = () => {
   return <Template />;
 };
 
-export default Forgot;
+export default ForgotPage;

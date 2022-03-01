@@ -4,7 +4,7 @@ import Template from 'components/templates/Login/index';
 import { useSetRecoilState } from 'recoil';
 import { pageTitle } from 'recoil/title/atom';
 
-const Login: NextPage = () => {
+const LoginPage: NextPage = () => {
   const setTitle = useSetRecoilState<string>(pageTitle);
   useEffect(() => {
     setTitle('Login');
@@ -13,4 +13,4 @@ const Login: NextPage = () => {
   return <Template />;
 };
 
-export default Login;
+export default LoginPage;

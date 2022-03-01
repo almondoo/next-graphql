@@ -1,8 +1,8 @@
 import { NextPage } from 'next';
 import Template from 'components/templates/LoginCheck/index';
 
-const LoginCheck: NextPage = () => {
+const LoginCheckPage: NextPage = () => {
   return <Template />;
 };
 
-export default LoginCheck;
+export default LoginCheckPage;

@@ -4,7 +4,7 @@ import Template from '../components/templates/Home/index';
 import { useSetRecoilState } from 'recoil';
 import { pageTitle } from '../recoil/title/atom';
 
-const Home: NextPage = () => {
+const HomePage: NextPage = () => {
   const setTitle = useSetRecoilState<string>(pageTitle);
   useEffect(() => {
     setTitle('Home');
@@ -12,4 +12,4 @@ const Home: NextPage = () => {
   return <Template />;
 };
 
-export default Home;
+export default HomePage;
