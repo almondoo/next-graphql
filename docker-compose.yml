@@ -30,13 +30,14 @@ services:
       - ./docker/nginx/logs:/var/log/nginx
       - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
       - php-fpm-socket:/var/run/php-fpm
+
   node:
     build:
       context: ./docker/node
     tty: true
     volumes:
       - ./next:/var/www/next
-      - node-modules-store:/var/www/next/node_modules
+      # - node-modules-store:/var/www/next/node_modules
     ports:
       - "3000:3000"
 
@@ -60,4 +61,4 @@ volumes:
   db-store:
   php-fpm-socket:
   vendor-store:
-  node-modules-store:
+  # node-modules-store:
