@@ -22,6 +22,10 @@ class RepositoryServiceProvider extends ServiceProvider
             \App\Infrastructure\Interfaces\TaskInterface::class,
             \App\Infrastructure\Repositories\TaskRepository::class,
         );
+        $this->app->bind(
+            \App\Infrastructure\Interfaces\TokenInterface::class,
+            \App\Infrastructure\Repositories\TokenRepository::class,
+        );
     }
 
     /**

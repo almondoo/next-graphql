@@ -23,14 +23,15 @@ class LoginUserUseCase extends UseCase
     }
 
     /**
-     * ユースケースに合った処理を行う
-     * 返り値で失敗の場合は全てfalseを返す
+     * ログイン処理
      */
     public function execute(array $request): array
     {
-        if ($this->authService->authenticate($request['email'], $request['password'], $request['is_remember'])) {
+        $auth = $this->authService->authenticate($request['email'], $request['password']);
+        if ($auth) {
             return $this->commit([
-                'user' => $this->authService->fetchLoginUser()
+                'access_token' => $auth['access_token'],
+                'refresh_token' => $auth['refresh_token']
             ]);
         }
         $this->addErrorMessage('login', 'メールアドレスかパスワードが違います。');

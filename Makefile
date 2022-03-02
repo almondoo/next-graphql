@@ -32,4 +32,4 @@ mysql:
 	docker-compose exec mysql bash
 
 nginx:
-	docker-compose exec nginx ash
+	docker-compose exec nginx bash

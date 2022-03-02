@@ -24,9 +24,7 @@ class RegisterUserUseCase extends UseCase
     }
 
     /**
-     * 処理実行
-     * 
-     * @param array $where 条件
+     * ユーザー作成処理
      */
     public function execute(array $request): array
     {
@@ -43,9 +41,17 @@ class RegisterUserUseCase extends UseCase
             $this->addErrorMessage('create_user', $e->getMessage());
             return $this->fail();
         }
-        if ($this->authService->authenticate($user->email, $request['password'], $request['is_remember'])) {
-            $user = $this->authService->fetchLoginUser();
+
+        // createしたユーザーなので必ず通る
+        $auth = $this->authService->authenticate($user->email, $request['password']);
+        if (!$auth) {
+            $this->addErrorMessage('unAuthenticated', '認証に失敗しました。');
+            return $this->fail();
         }
-        return $this->commit(['user' => $user]);
+
+        return $this->commit([
+            'access_token' => $auth['access_token'],
+            'refresh_token' => $auth['refresh_token'],
+        ]);
     }
 }

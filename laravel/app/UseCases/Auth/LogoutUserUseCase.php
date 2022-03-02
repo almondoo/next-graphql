@@ -18,13 +18,14 @@ class LogoutUserUseCase extends UseCase
     }
 
     /**
-     * 処理実行
-     * 
-     * @param array $where 条件
+     * ログアウト処理
      */
     public function execute(): array
     {
-        $this->authService->logout();
+        if (!$this->authService->logout()) {
+            $this->addErrorMessage('token', 'トークンの削除に失敗しました。');
+            return $this->fail();
+        }
         return $this->commit();
     }
 }

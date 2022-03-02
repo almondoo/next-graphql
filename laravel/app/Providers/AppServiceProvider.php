@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\URL;
+use Laravel\Passport\Passport;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -28,6 +29,7 @@ class AppServiceProvider extends ServiceProvider
         if (env('APP_ENV') == 'production') {
             URL::forceScheme('https');
         }
+
         // idの場合も正規表現
         Route::pattern('id', '[0-9]+');
     }

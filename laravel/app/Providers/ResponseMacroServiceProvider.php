@@ -14,15 +14,24 @@ class ResponseMacroServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Response::macro('success', function (string $view, array $data = []) {
-            return view($view, $data);
+        Response::macro('custom', function (int $status_code, array $data) {
+            return response()->json($data, $status_code);
         });
 
         /**
-         * 直前のURLにリダイレクトしてエラーを送る
+         * 成功
          */
-        Response::macro('fail', function (array $messages = []) {
-            return back()->withErrors($messages);
+        Response::macro('success', function (array $data = []) {
+            return response()->json($data, 200);
+        });
+
+        /**
+         * 失敗
+         */
+        Response::macro('fail', function (array $errors = [], int $status_code = 500,) {
+            return response()->json([
+                'errors' => $errors,
+            ], $status_code);
         });
     }
 }
