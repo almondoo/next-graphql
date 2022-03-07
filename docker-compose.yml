@@ -6,9 +6,9 @@ services:
       context: .
       dockerfile: ./docker/php/Dockerfile
     volumes:
-      - ./laravel:/var/www/laravel
+      - ./laravel:/var/www/laravel:delegated
       - ./docker/php/php.ini:/usr/local/etc/php/php.ini
-      - next-graphql-vendor-store:/var/www/laravel/vendor
+      - vendor-store:/var/www/laravel/vendor
       - php-fpm-socket:/var/run/php-fpm
     environment:
       - DB_CONNECTION=mysql
@@ -27,7 +27,7 @@ services:
     ports:
       - 8080:80
     volumes:
-      - ./laravel:/var/www/laravel
+      - ./laravel:/var/www/laravel:delegated
       - ./docker/nginx/logs:/var/log/nginx
       - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
       - php-fpm-socket:/var/run/php-fpm
@@ -37,8 +37,8 @@ services:
       context: ./docker/node
     tty: true
     volumes:
-      - ./next:/var/www/next
-      - next-graphql-node-modules-store:/var/www/next/node_modules
+      - ./next:/var/www/next:delegated
+      - node-modules-store:/var/www/next/node_modules
     ports:
       - "3000:3000"
 
@@ -73,5 +73,5 @@ services:
 volumes:
   db-store:
   php-fpm-socket:
-  next-graphql-vendor-store:
-  next-graphql-node-modules-store:
+  vendor-store:
+  node-modules-store:
