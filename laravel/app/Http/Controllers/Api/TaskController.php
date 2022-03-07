@@ -48,10 +48,9 @@ class TaskController extends Controller
         if ($result['is_fail']) {
             return response()->fail($result['messages']);
         }
-        if ($request->session()->has('status')) {
-            $result['data']['status'] = $request->session()->get('status');
-        }
-        return response()->success('task.list', $result['data']);
+        return response()->success([
+            'data' => $result['data']
+        ]);
     }
 
     public function detailTask(Request $request, Task $task): View
@@ -63,10 +62,7 @@ class TaskController extends Controller
                 return response()->fail($result['messages']);
             }
         }
-        if ($request->session()->has('status')) {
-            $result['data']['status'] = $request->session()->get('status');
-        }
-        return response()->success('task.detail', $result['data']);
+        return response()->success($result['data']);
     }
 
     public function createTask(CreateTaskRequest $request): RedirectResponse
@@ -75,9 +71,10 @@ class TaskController extends Controller
         if ($result['is_fail']) {
             return response()->fail($result['messages']);
         }
-        $request->session()->flash('status', self::CREATE_STATUS);
-        return to_route('task.detail', [
-            'task' => $result['data']['task']->id,
+        return response()->success([
+            'data' => [
+                'task' => $result['data']['task']->id,
+            ]
         ]);
     }
 
@@ -90,9 +87,10 @@ class TaskController extends Controller
         if ($result['is_fail']) {
             return response()->fail($result['messages']);
         }
-        $request->session()->flash('status', self::UPDATE_STATUS);
-        return to_route('task.detail', [
-            'task' => $request->input('id'),
+        return response()->success([
+            'data' => [
+                'task' => $result['data']['task']->id,
+            ]
         ]);
     }
 
@@ -102,7 +100,10 @@ class TaskController extends Controller
         if ($result['is_fail']) {
             return response()->fail($result['messages']);
         }
-        $request->session()->flash('status', self::DELETE_STATUS);
-        return to_route('task.list');
+        return response()->success([
+            'data' => [
+                'task' => $result['data']['task']->id,
+            ]
+        ]);
     }
 }
