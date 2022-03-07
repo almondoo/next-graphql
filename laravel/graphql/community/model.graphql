@@ -1,0 +1,8 @@
+type Community {
+  id: ID!
+  group_name: String!
+  created_at: DateTime!
+  updated_at: DateTime!
+  members: [Member!]! @hasMany
+  messages: [Message!]! @hasMany
+}

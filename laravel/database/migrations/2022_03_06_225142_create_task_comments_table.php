@@ -13,19 +13,18 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tasks', function (Blueprint $table) {
+        Schema::create('task_comments', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('task_id');
             $table->unsignedBigInteger('user_id');
-            $table->unsignedTinyInteger('task_status_id');
-            $table->string('title', 100);
-            $table->text('text');
+            $table->text('comment');
             $table->timestamps();
+
+            $table->foreign('task_id')->references('id')
+                ->on('tasks')->cascadeOnUpdate()->cascadeOnDelete();
 
             $table->foreign('user_id')->references('id')
                 ->on('users')->cascadeOnUpdate()->cascadeOnDelete();
-
-            $table->foreign('task_status_id')->references('id')
-                ->on('task_statuses')->cascadeOnUpdate()->cascadeOnDelete();
         });
     }
 
@@ -36,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tasks');
+        Schema::dropIfExists('task_comments');
     }
 };

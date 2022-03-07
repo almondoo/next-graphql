@@ -1,0 +1,21 @@
+"A datetime string with format `Y-m-d H:i:s`, e.g. `2018-05-23 13:43:32`."
+scalar DateTime @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
+
+"Indicates what fields are available at the top level of a query operation."
+type Query {
+  # user
+  user(id: ID @eq): User @find
+  users: [User!]! @paginate(defaultCount: 10)
+
+  # task
+  task(id: ID @eq): Task! @find
+  tasks: [Task!]! @paginate(defaultCount: 10)
+}
+
+#import user/index.graphql
+#import task/index.graphql
+#import task_status/index.graphql
+#import task_comment/index.graphql
+#import community/index.graphql
+#import member/index.graphql
+#import message/index.graphql

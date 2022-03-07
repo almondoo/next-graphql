@@ -1,0 +1,5 @@
+type TaskStatus {
+  id: ID!
+  status: String!
+  task: [Task!]! @hasMany
+}

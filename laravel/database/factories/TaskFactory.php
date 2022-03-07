@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\TaskStatus;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -18,7 +19,8 @@ class TaskFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => User::first(),
+            'task_status_id' => TaskStatus::inRandomOrder()->first(),
+            'user_id' => User::inRandomOrder()->first(),
             'title' => $this->faker->word(),
             'text' => $this->faker->text() . $this->faker->text() . $this->faker->text(),
         ];

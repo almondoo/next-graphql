@@ -40,11 +40,23 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    protected $table = 'users';
+
     /**
      * tasksとのリレーション
      */
     public function tasks()
     {
         return $this->hasMany(Task::class);
+    }
+
+    public function members()
+    {
+        return $this->hasMany(Member::class);
+    }
+
+    public function sender_messages()
+    {
+        return $this->hasMany(Message::class, null, 'sender_id');
     }
 }

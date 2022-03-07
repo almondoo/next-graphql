@@ -1,0 +1,8 @@
+type TaskComment {
+  id: ID!
+  task: Task @belongsTo
+  user: User! @belongsTo
+  comment: String!
+  created_at: DateTime!
+  updated_at: DateTime!
+}

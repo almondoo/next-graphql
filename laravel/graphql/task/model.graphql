@@ -1,0 +1,10 @@
+type Task {
+  id: ID!
+  task_status: TaskStatus! @belongsTo
+  user: User! @belongsTo
+  title: String!
+  text: String!
+  created_at: DateTime!
+  updated_at: DateTime!
+  task_comments: [TaskComment!]! @hasMany
+}
