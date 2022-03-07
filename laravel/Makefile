@@ -4,6 +4,7 @@ all-clear:
 	php artisan config:clear
 	php artisan route:clear
 	php artisan view:clear
+	php artisan lighthouse:clear-cache
 	composer dump-autoload
 
 all-cache:
