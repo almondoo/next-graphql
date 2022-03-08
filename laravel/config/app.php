@@ -179,6 +179,7 @@ return [
         // 追加Provider
         App\Providers\RepositoryServiceProvider::class,
         App\Providers\ResponseMacroServiceProvider::class,
+        \Nuwave\Lighthouse\Tracing\TracingServiceProvider::class,
 
     ],
 

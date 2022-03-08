@@ -24,13 +24,13 @@ values. Int can represent values between -(2^31) and 2^31 - 1.
 """
 scalar Int
 
-"""A paginated list of User items."""
-type UserPaginator {
+"""A paginated list of Community items."""
+type CommunityPaginator {
   """Pagination information about the list of items."""
   paginatorInfo: PaginatorInfo!
 
-  """A list of User items."""
-  data: [User!]!
+  """A list of Community items."""
+  data: [Community!]!
 }
 
 """Information about pagination using a fully featured paginator."""
@@ -62,6 +62,33 @@ type PaginatorInfo {
 
 """The `Boolean` scalar type represents `true` or `false`."""
 scalar Boolean
+
+"""A paginated list of Member items."""
+type MemberPaginator {
+  """Pagination information about the list of items."""
+  paginatorInfo: PaginatorInfo!
+
+  """A list of Member items."""
+  data: [Member!]!
+}
+
+"""A paginated list of Task items."""
+type TaskPaginator {
+  """Pagination information about the list of items."""
+  paginatorInfo: PaginatorInfo!
+
+  """A list of Task items."""
+  data: [Task!]!
+}
+
+"""A paginated list of User items."""
+type UserPaginator {
+  """Pagination information about the list of items."""
+  paginatorInfo: PaginatorInfo!
+
+  """A list of User items."""
+  data: [User!]!
+}
 
 """
 The `Float` scalar type represents signed double-precision fractional

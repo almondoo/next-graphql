@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        if (User::where('email', 'example@example.com')->first()) {
+        if (!User::where('email', 'example@example.com')->first()) {
             $this->call([
                 UserSeeder::class,
             ]);
