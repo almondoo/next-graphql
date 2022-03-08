@@ -1,6 +1,6 @@
 type Member {
   id: ID!
   community: Community! @belongsTo
-  member: User! @belongsTo
+  user: User! @belongsTo
   created_at: DateTime!
 }

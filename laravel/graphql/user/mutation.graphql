@@ -1,0 +1,16 @@
+extend type Mutation {
+  createUser(input: CreateUserInput! @spread): User! @create
+  updateUser(input: UpdateUserInput!): User! @update
+  deleteUser(id: ID!): User @delete
+}
+
+input CreateUserInput {
+  name: String!
+  email: Email!
+  password: String! @hash
+}
+
+input UpdateUserInput {
+  name: String!
+  email: Email!
+}

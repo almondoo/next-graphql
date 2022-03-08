@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Community extends Model
 {
@@ -20,12 +21,12 @@ class Community extends Model
 
     protected $table = 'communities';
 
-    public function messages()
+    public function messages(): HasMany
     {
         return $this->hasMany(Message::class);
     }
 
-    public function members()
+    public function members(): HasMany
     {
         return $this->hasMany(Member::class);
     }

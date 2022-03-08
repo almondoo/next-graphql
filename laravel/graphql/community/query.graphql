@@ -1,0 +1,4 @@
+extend type Query {
+  community(id: ID @eq): Community! @find
+  communities: [Community!]! @paginate(defaultCount: 10)
+}

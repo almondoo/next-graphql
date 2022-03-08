@@ -1,0 +1,12 @@
+extend type Mutation {
+  "ログイン機能"
+  login(input: LoginInput! @spread): User!
+
+  "ログアウト機能"
+  logout: User! @auth
+}
+
+input LoginInput {
+  email: Email
+  password: String!
+}

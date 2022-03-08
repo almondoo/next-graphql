@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
@@ -45,17 +46,17 @@ class User extends Authenticatable
     /**
      * tasksとのリレーション
      */
-    public function tasks()
+    public function tasks(): HasMany
     {
         return $this->hasMany(Task::class);
     }
 
-    public function members()
+    public function members(): HasMany
     {
         return $this->hasMany(Member::class);
     }
 
-    public function sender_messages()
+    public function messages(): HasMany
     {
         return $this->hasMany(Message::class, null, 'sender_id');
     }

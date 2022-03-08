@@ -1,0 +1,3 @@
+extend type Query {
+  task_comment(id: ID @eq): TaskComment @find
+}

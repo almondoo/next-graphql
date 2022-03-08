@@ -1,1 +1,3 @@
 #import model.graphql
+#import query.graphql
+#import mutation.graphql

@@ -1,0 +1,4 @@
+extend type Query {
+  task(id: ID @eq): Task! @find
+  tasks: [Task!]! @paginate(defaultCount: 10)
+}

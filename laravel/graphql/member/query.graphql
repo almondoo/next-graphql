@@ -1,0 +1,4 @@
+extend type Query {
+  member(id: ID @eq): Member @find
+  members: [Member!]! @paginate(defaultCount: 10)
+}
