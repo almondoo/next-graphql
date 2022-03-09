@@ -7,6 +7,7 @@ use App\Models\User;
 interface UserInterface
 {
     public function find(int $id): ?User;
+    public function findByEmail(string $email): ?User;
     public function fetchAll(): array;
     public function createUser(array $request): User;
     public function updateUser(int $id, array $request): int;

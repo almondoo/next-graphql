@@ -23,8 +23,7 @@ class LogoutUserUseCase extends UseCase
     public function execute(): array
     {
         if (!$this->authService->logout()) {
-            $this->addErrorMessage('token', 'トークンの削除に失敗しました。');
-            return $this->fail();
+            return $this->fail('トークンの削除に失敗しました。');
         }
         return $this->commit();
     }

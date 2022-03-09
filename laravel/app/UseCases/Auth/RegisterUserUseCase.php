@@ -38,18 +38,17 @@ class RegisterUserUseCase extends UseCase
             DB::commit();
         } catch (\Throwable $e) {
             DB::rollBack();
-            $this->addErrorMessage('create_user', $e->getMessage());
-            return $this->fail();
+            return $this->fail($e->getMessage());
         }
 
         // createしたユーザーなので必ず通る
         $auth = $this->authService->authenticate($user->email, $request['password']);
         if (!$auth) {
-            $this->addErrorMessage('unAuthenticated', '認証に失敗しました。');
-            return $this->fail();
+            return $this->fail('認証に失敗しました。');
         }
 
         return $this->commit([
+            'user' => $this->authService->fetchForceLoginUser($request['email']),
             'access_token' => $auth['access_token'],
             'refresh_token' => $auth['refresh_token'],
         ]);

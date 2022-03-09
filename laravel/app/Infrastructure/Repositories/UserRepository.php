@@ -20,6 +20,11 @@ class UserRepository implements UserInterface
         return $this->user->find($id);
     }
 
+    public function findByEmail(string $email): ?User
+    {
+        return $this->user->where('email', $email)->first();
+    }
+
     public function fetchAll(): array
     {
         return $this->user->get();

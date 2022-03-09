@@ -39,8 +39,7 @@ class CreateTaskUseCase extends UseCase
             DB::commit();
         } catch (\Throwable $e) {
             DB::rollBack();
-            $this->addErrorMessage('task', $e->getMessage());
-            return $this->fail();
+            return $this->fail($e->getMessage());
         }
         return $this->commit(['task' => $task]);
     }

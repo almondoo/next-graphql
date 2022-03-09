@@ -1,0 +1,33 @@
+extend type Mutation {
+  "タスクを作成する"
+  createTask(input: CreateTaskInput @spread): CreateTaskPayload!
+    @field(resolver: "App\\GraphQL\\Mutations\\Task\\CreateTask")
+
+  "タスク情報を更新する"
+  updateTask(input: UpdateTaskInput @spread): UpdateTaskPayload!
+    @field(resolver: "App\\GraphQL\\Mutations\\Task\\UpdateTask")
+
+  "タスクを削除する"
+  deleteTask(id: ID): Task @field(resolver: "App\\GraphQL\\Mutations\\Task\\DeleteTask")
+}
+
+input CreateTaskInput {
+  task_status_id: Int!
+  user_id: Int!
+  title: String!
+  text: String!
+}
+
+input UpdateTaskInput {
+  task_status_id: Int!
+  title: String!
+  text: String!
+}
+
+type CreateTaskPayload {
+  task: Task!
+}
+
+type UpdateTaskPayload {
+  task: Task!
+}

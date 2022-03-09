@@ -1,12 +1,19 @@
 extend type Mutation {
   "ログイン機能"
-  login(input: LoginInput! @spread): User!
+  login(input: LoginInput! @spread): LoginPayload @field(resolver: "App\\GraphQL\\Mutations\\Auth\\Login")
 
   "ログアウト機能"
-  logout: User! @auth
+  logout: Boolean @field(resolver: "App\\GraphQL\\Mutations\\Auth\\Logout")
 }
 
-input LoginInput {
-  email: Email
+input LoginInput @validator(class: "App\\GraphQL\\Validators\\Auth\\LoginInputValidator") {
+  email: Email!
   password: String!
+}
+
+type LoginPayload {
+  name: String!
+  email: Email!
+  access_token: String!
+  refresh_token: String!
 }

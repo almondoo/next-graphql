@@ -31,7 +31,7 @@ class AuthService
         $response = Http::asForm()->post(env('APP_GUZZLE_URL') . '/oauth/token', [
             'grant_type' => 'password',
             'client_id' => '2',
-            'client_secret' => '$2y$10$2bjTYj6s2Y3nYRLzJSz7O.F7kdlU.29zbXFAHcnA39AVQajpevtzy',
+            'client_secret' => env('PASSPORT_PASSWORD_CLIENT_SECRET'),
             'username' => $email,
             'password' => $password,
             'scope' => '',
@@ -57,5 +57,13 @@ class AuthService
     public function fetchLoginUser(): ?User
     {
         return $this->userRepo->fetchLoginUser();
+    }
+
+    /**
+     * ログインタイミングのユーザー取得 (強制)
+     */
+    public function fetchForceLoginUser(string $email): ?User
+    {
+        return $this->userRepo->findByEmail($email);
     }
 }
