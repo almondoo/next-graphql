@@ -6,6 +6,7 @@ use App\GraphQL\Mutations\Mutation;
 use App\UseCases\Auth\RegisterUserUseCase;
 use Error;
 use GraphQL\Type\Definition\ResolveInfo;
+use Illuminate\Support\Facades\Log;
 use Nuwave\Lighthouse\Support\Contracts\GraphQLContext;
 
 class CreateUser extends Mutation
@@ -28,12 +29,9 @@ class CreateUser extends Mutation
      */
     public function __invoke($root, array $args, GraphQLContext $context, ResolveInfo $resolveInfo): array
     {
-        if (!$this->authenticated($context->user())) {
-            throw new Error(self::AUTHENTICATED_CANNOT_USED);
-        }
         $result = $this->registerUserUseCase->execute($args);
         if ($result['is_fail']) {
-            return new Error($result['message']);
+            throw new Error($result['message']);
         }
 
         $access_token = $result['data']['access_token'];

@@ -268,7 +268,8 @@ return [
     */
 
     'error_handlers' => [
-        \Nuwave\Lighthouse\Execution\AuthenticationErrorHandler::class,
+        // \Nuwave\Lighthouse\Execution\AuthenticationErrorHandler::class,
+        \App\Exceptions\CustomAuthenticationErrorHandler::class,
         \Nuwave\Lighthouse\Execution\AuthorizationErrorHandler::class,
         \Nuwave\Lighthouse\Execution\ValidationErrorHandler::class,
         \Nuwave\Lighthouse\Execution\ExtensionErrorHandler::class,

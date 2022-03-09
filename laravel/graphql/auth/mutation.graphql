@@ -3,7 +3,7 @@ extend type Mutation {
   login(input: LoginInput! @spread): LoginPayload @field(resolver: "App\\GraphQL\\Mutations\\Auth\\Login")
 
   "ログアウト機能"
-  logout: Boolean @field(resolver: "App\\GraphQL\\Mutations\\Auth\\Logout")
+  logout: Boolean @guard @field(resolver: "App\\GraphQL\\Mutations\\Auth\\Logout")
 }
 
 input LoginInput @validator(class: "App\\GraphQL\\Validators\\Auth\\LoginInputValidator") {

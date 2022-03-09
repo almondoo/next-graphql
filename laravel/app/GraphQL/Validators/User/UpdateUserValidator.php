@@ -2,6 +2,8 @@
 
 namespace App\GraphQL\Validators\User;
 
+use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\Rule;
 use Nuwave\Lighthouse\Validation\Validator;
 
 class UpdateUserValidator extends Validator

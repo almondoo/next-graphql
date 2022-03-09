@@ -6,6 +6,7 @@ use App\GraphQL\Mutations\Mutation;
 use Error;
 use App\UseCases\Auth\LogoutUserUseCase;
 use GraphQL\Type\Definition\ResolveInfo;
+use Illuminate\Support\Facades\Log;
 use Nuwave\Lighthouse\Support\Contracts\GraphQLContext;
 
 class Logout extends Mutation
@@ -31,9 +32,6 @@ class Logout extends Mutation
      */
     public function __invoke($root, array $args, GraphQLContext $context, ResolveInfo $resolveInfo): bool
     {
-        if (!$this->authenticated($context->user())) {
-            throw new Error(self::UN_AUTHENTICATED_MESSAGE);
-        }
         $result = $this->logoutUserUseCase->execute();
         if ($result['is_fail']) {
             throw new Error($result['message']);
