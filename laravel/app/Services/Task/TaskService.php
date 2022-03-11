@@ -46,7 +46,7 @@ class TaskService
         return $this->taskRepo->createTask($data);
     }
 
-    public function updateTask(int $id, array $data): bool
+    public function updateTask(int $id, array $data): Task
     {
         return $this->taskRepo->updateTask($id, $data);
     }

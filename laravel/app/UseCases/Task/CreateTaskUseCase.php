@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\DB;
 
 class CreateTaskUseCase extends UseCase
 {
+    const DEFAULT_TASK_STATUS_ID = 1;
+
     private TaskService $taskService;
     private AuthService $authService;
 
@@ -32,6 +34,7 @@ class CreateTaskUseCase extends UseCase
         DB::beginTransaction();
         try {
             $task = $this->taskService->createTask([
+                'task_status_id' => self::DEFAULT_TASK_STATUS_ID,
                 'user_id' => $login_user->id,
                 'title' => $request['title'],
                 'text' =>  $request['text'],

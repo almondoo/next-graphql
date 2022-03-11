@@ -29,7 +29,7 @@ class UpdateTaskUseCase extends UseCase
     {
         DB::beginTransaction();
         try {
-            $this->taskService->updateTask($request['id'], [
+            $task = $this->taskService->updateTask($request['id'], [
                 'title' => $request['title'],
                 'text' =>  $request['text'],
             ]);
@@ -38,6 +38,6 @@ class UpdateTaskUseCase extends UseCase
             DB::rollBack();
             $this->fail($e->getMessage());
         }
-        return $this->commit();
+        return $this->commit(['task' => $task]);
     }
 }
