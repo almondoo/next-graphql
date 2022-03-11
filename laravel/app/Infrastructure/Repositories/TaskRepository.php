@@ -39,10 +39,11 @@ class TaskRepository implements TaskInterface
         return $this->task->create($request);
     }
 
-    public function updateTask(int $id, array $request): int
+    public function updateTask(int $id, array $request): Task
     {
         $task = $this->find($id);
-        return $task->fill($request)->save();
+        $task->fill($request)->save();
+        return $task->refresh();
     }
 
     public function deleteTask(int $id): int

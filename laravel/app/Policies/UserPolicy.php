@@ -2,13 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\Task;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Auth\Access\Response;
-use Illuminate\Support\Facades\Log;
 
-class TaskPolicy extends Policy
+class UserPolicy extends Policy
 {
     use HandlesAuthorization;
 
@@ -20,19 +18,19 @@ class TaskPolicy extends Policy
      */
     public function viewAny(User $user)
     {
-        // 
+        //
     }
 
     /**
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Task  $task
+     * @param  \App\Models\User  $model
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Task $task)
+    public function view(User $user, User $model)
     {
-        //
+        return $user->id === $model->id;
     }
 
     /**
@@ -50,14 +48,12 @@ class TaskPolicy extends Policy
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Task  $task
-     * @return \Illuminate\Auth\Access\Response
+     * @param  \App\Models\User  $model
+     * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Task $task): Response
+    public function update(User $user, User $model): Response
     {
-        Log::info($user);
-        Log::info($task);
-        return $user->id === $task->user_id
+        return $user->id === $model->id
             ? Response::allow()
             : Response::deny(self::DENY_MESSAGE);
     }
@@ -66,12 +62,12 @@ class TaskPolicy extends Policy
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Task  $task
-     * @return \Illuminate\Auth\Access\Response
+     * @param  \App\Models\User  $model
+     * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Task $task): Response
+    public function delete(User $user, User $model): Response
     {
-        return $user->id === $task->user_id
+        return $user->id === $model->id
             ? Response::allow()
             : Response::deny(self::DENY_MESSAGE);
     }
@@ -80,10 +76,10 @@ class TaskPolicy extends Policy
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Task  $task
+     * @param  \App\Models\User  $model
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, Task $task)
+    public function restore(User $user, User $model)
     {
         //
     }
@@ -92,10 +88,10 @@ class TaskPolicy extends Policy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Task  $task
+     * @param  \App\Models\User  $model
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, Task $task)
+    public function forceDelete(User $user, User $model)
     {
         //
     }
