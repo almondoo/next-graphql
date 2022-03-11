@@ -1,33 +1,39 @@
 extend type Mutation {
   "タスクを作成する"
-  createTask(input: CreateTaskInput @spread): CreateTaskPayload!
+  createTask(input: CreateTaskInput! @spread): Task!
+    @guard
     @field(resolver: "App\\GraphQL\\Mutations\\Task\\CreateTask")
 
   "タスク情報を更新する"
-  updateTask(input: UpdateTaskInput @spread): UpdateTaskPayload!
+  updateTask(input: UpdateTaskInput! @spread): Task!
+    @guard
+    @can(ability: "update", query: true)
     @field(resolver: "App\\GraphQL\\Mutations\\Task\\UpdateTask")
 
   "タスクを削除する"
-  deleteTask(id: ID): Task @field(resolver: "App\\GraphQL\\Mutations\\Task\\DeleteTask")
+  deleteTask(id: ID! @eq): Task
+    @guard
+    @can(ability: "delete", query: true)
+    @delete
+    @validator(class: "App\\GraphQL\\Validators\\Task\\DeleteTaskValidator")
 }
 
-input CreateTaskInput {
-  task_status_id: Int!
-  user_id: Int!
+input CreateTaskInput @validator(class: "App\\GraphQL\\Validators\\Task\\CreateTaskValidator") {
   title: String!
   text: String!
 }
 
-input UpdateTaskInput {
+input UpdateTaskInput @validator(class: "App\\GraphQL\\Validators\\Task\\UpdateTaskValidator") {
+  id: ID! @eq
   task_status_id: Int!
   title: String!
   text: String!
 }
 
-type CreateTaskPayload {
-  task: Task!
-}
+# type CreateTaskPayload {
 
-type UpdateTaskPayload {
-  task: Task!
-}
+# }
+
+# type UpdateTaskPayload {
+#   task: Task!
+# }
