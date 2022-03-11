@@ -1,10 +1,9 @@
-const wrap = {
-  width: '100%',
-  padding: '20px',
+const td = {
+  wordBreak: 'break-all',
 };
 
 const exportDefault = {
-  wrap,
+  td,
 };
 
 export default exportDefault;
