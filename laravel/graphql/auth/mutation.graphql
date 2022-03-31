@@ -6,8 +6,8 @@ extend type Mutation {
   logout: Boolean @guard @field(resolver: "App\\GraphQL\\Mutations\\Auth\\Logout")
 }
 
-input LoginInput @validator(class: "App\\GraphQL\\Validators\\Auth\\LoginInputValidator") {
-  email: Email!
+input LoginInput @validator(class: "App\\GraphQL\\Validators\\Auth\\LoginValidator") {
+  email: String!
   password: String!
 }
 

@@ -1,3 +1,4 @@
 extend type Query {
-  task_status(id: ID @eq): TaskStatus @find
+  task_status(id: ID! @eq): TaskStatus @find
+  task_statuses: [TaskStatus!]! @all
 }

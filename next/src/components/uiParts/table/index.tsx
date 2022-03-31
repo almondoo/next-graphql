@@ -12,7 +12,7 @@ import type { Column } from 'models/utils';
 import Link from 'next/link';
 import { Link as MLink } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
-import SettingsIcon from '@mui/icons-material/Settings';
+import EditIcon from '@mui/icons-material/Edit';
 
 type Props<T> = {
   rows: T[];
@@ -58,8 +58,8 @@ function SimpleTable<T extends { id?: number }>({ rows, columns, height, isLoad 
                           <TableCell key={column.id} align={column.align}>
                             <Link href={`${column.route}/${row['id']}`} passHref>
                               <MLink>
-                                <IconButton color="primary" size="large">
-                                  <SettingsIcon fontSize="large" />
+                                <IconButton color="primary">
+                                  <EditIcon />
                                 </IconButton>
                               </MLink>
                             </Link>

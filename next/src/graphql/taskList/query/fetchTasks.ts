@@ -1,8 +1,9 @@
 import { gql } from '@apollo/client';
 import type { Task } from 'models/task';
+import type { Paginate } from 'models/utils';
 
 export const FETCH_TASKS_QUERY = gql`
-  query FetchTask($page: Int) {
+  query FetchTasks($page: Int) {
     tasks(first: 100, page: $page) {
       data {
         id
@@ -22,5 +23,8 @@ export const FETCH_TASKS_QUERY = gql`
 `;
 
 export interface TaskData {
-  tasks: Task[];
+  tasks: {
+    data: Task[];
+    paginatorInfo: Paginate;
+  };
 }

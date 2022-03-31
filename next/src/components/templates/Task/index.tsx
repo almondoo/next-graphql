@@ -1,17 +1,17 @@
+import { useState, useEffect } from 'react';
 import styles from './style';
 import type { Task } from 'models/task';
 import type { Column, Paginate } from 'models/utils';
 import Box from '@mui/material/Box';
 import Table from 'components/uiParts/table/index';
 import Pagination from '@mui/material/Pagination';
-import { useRecoilState } from 'recoil';
-import { taskPage } from 'recoil/page/atom';
 import { ChangeEvent } from 'react';
+import routes from 'utils/route';
+import { useRouter } from 'next/router';
 
 type Props = {
   tasks: Task[];
   paginate: Paginate;
-  isLoad: boolean;
 };
 
 const columns: Column<Task>[] = [
@@ -42,16 +42,29 @@ const columns: Column<Task>[] = [
     label: '編集',
     minWidth: 62,
     align: 'center',
-    route: '/task',
+    route: routes.taskDetail,
   },
 ];
 
-const TaskTemplate = ({ tasks, paginate, isLoad }: Props): JSX.Element => {
-  const [page, setPage] = useRecoilState<number>(taskPage);
+const TaskTemplate = ({ tasks, paginate }: Props): JSX.Element => {
+  const router = useRouter();
+  const [page, setPage] = useState<number>(paginate.currentPage);
+  const [isLoad, setIsLoad] = useState<boolean>(false);
 
   const handleChange = (_: ChangeEvent<unknown>, value: number) => {
+    setIsLoad(true);
     setPage(value);
+    router.replace({
+      pathname: routes.taskList,
+      query: { page: value },
+    });
   };
+
+  useEffect(() => {
+    if (isLoad) {
+      setIsLoad(false);
+    }
+  }, [tasks]);
 
   return (
     <Box sx={styles.wrap}>

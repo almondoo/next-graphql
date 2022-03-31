@@ -1,3 +1,4 @@
+import { KeyboardEvent } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -9,20 +10,28 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import Copyright from '../../uiParts/Copyright';
+import CircularProgress from '@mui/material/CircularProgress';
+import Copyright from 'components/uiParts/Copyright';
 import Link from 'next/link';
-import routes from '../../../utils/route';
+import routes from 'utils/route';
 import { useAuth0 } from '@auth0/auth0-react';
+import { useMutation } from '@apollo/client';
+import { LOGIN_MUTATION, LoginData } from 'graphql/auth/mutation/login';
 
 const Login = (): JSX.Element => {
   const { loginWithRedirect } = useAuth0();
+  const [login, { loading, data, error }] = useMutation<LoginData>(LOGIN_MUTATION);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
+    login({
+      variables: {
+        input: {
+          email: data.get('email'),
+          password: data.get('password'),
+        },
+      },
     });
   };
 
@@ -49,8 +58,15 @@ const Login = (): JSX.Element => {
             id="email"
             label="メールアドレス"
             name="email"
+            onKeyPress={(e: KeyboardEvent<HTMLInputElement>) => {
+              if (e.key === 'Enter') e.preventDefault();
+            }}
             autoComplete="email"
             autoFocus
+            // @ts-ignore
+            error={error?.graphQLErrors[0].extensions.validation['input.email'] ? true : false}
+            // @ts-ignore
+            helperText={error?.graphQLErrors[0].extensions.validation['input.email']}
           />
           <TextField
             margin="normal"
@@ -61,11 +77,21 @@ const Login = (): JSX.Element => {
             type="password"
             id="password"
             autoComplete="current-password"
+            // @ts-ignore
+            error={error?.graphQLErrors[0].extensions.validation['input.password'] ? true : false}
+            // @ts-ignore
+            helperText={error?.graphQLErrors[0].extensions.validation['input.password']}
           />
           <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember me" />
-          <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
-            ログイン
-          </Button>
+          {!loading ? (
+            <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
+              ログイン
+            </Button>
+          ) : (
+            <Button variant="contained" fullWidth color="primary" sx={{ mt: 3, mb: 2 }}>
+              <CircularProgress size={30} sx={{ color: 'white' }} />
+            </Button>
+          )}
         </Box>
         <Box mb={2} width="100%">
           <Button color="secondary" fullWidth variant="contained" onClick={() => loginWithRedirect()}>

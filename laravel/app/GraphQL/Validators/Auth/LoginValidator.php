@@ -4,7 +4,7 @@ namespace App\GraphQL\Validators\Auth;
 
 use Nuwave\Lighthouse\Validation\Validator;
 
-class LoginInputValidator extends Validator
+class LoginValidator extends Validator
 {
     /**
      * Return the validation rules.
